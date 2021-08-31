@@ -2,21 +2,80 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<h1>Quantum Tarot</h1>
-	<pre>
-		<div class="data">
-			<div id="key_2" class="key"></div>
-			<div id="key_1" class="key"></div>
-			<div id="key_3" class="key"></div>
+	<h1><a href="#" id="home">Quantum Divine</a></h1>
+	<br>
+	<ul class="front_ul"><li><a id="draw_tarot" href="#">Draw Tarot</li><li><a id="draw_iching" href="#">Draw IChing</a><li><a href="https://dubioustunic.github.io/godhand-tables/index.html">Liber 777 app</a></li></li></ul>
+	<br>
+	<h2 class="quantum_shift"></h2>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="intro">
+		<!--washington !-->
+		<span>Quantum Divine makes an inline call to a Quantum Computer to render Iching and Tarot (ascii) from a single HTML page.</span> 
+	</div>
+	<br>
+	<div class="tarot">
+		<pre>
+			<div class="data">
+				<div id="key_2" class="key"></div>
+				<div id="key_1" class="key"></div>
+				<div id="key_3" class="key"></div>
+			</div>		
+		</pre>
+	</div>
+	<div class="iching">
+		<div class="iching_data">
+
 		</div>
-	</pre>
+	</div>
 	
 
 	<script>
 		$(document).ready(function(){
+			$("#home").click(function(e){
+				e.preventDefault();
+				$(".tarot").hide();
+				$(".iching").hide();
+				$(".intro").show();
+			})
+
+			$("#draw_tarot").click(function(e){
+				$(".intro").hide();
+				$(".iching").hide();
+				$(".key").empty();
+				$(".tarot").show();
+				e.preventDefault();
+				$(".quantum-shift").text("Draw Tarot");
+				openingKeySpread()
+			})
+
+			$("#draw_iching").click(function(e){
+				$(".intro").hide()
+				$(".tarot").hide();
+				$(".iching_data").empty();
+				$(".iching").show();
+				e.preventDefault();
+				$(".quantum-shift").text("Draw IChing");
+				iching(function(err, data){
+					$(".iching_data").append(HEXAGRAMS[data]);
+				});
+			})
+
+
+		const HEXAGRAMS = {
+    1: '䷁ \n\n\nKHWAN: Great, originating, right and fair,\nPiercing and helpful, firm as in the mare.\nIf the true man should move, his feet will stray;\nFor him to follow is his proper way.\n\n\nHoar-frost! The strong one cometh by and by.\nStraight, square and great, advantage springs to eye.\nMaintain, but boast not virtue’s majesty.\nHere is a sack made safe by skillful tie.\nBehold the yellow skirt; ill fortune fly.\nDragons at war: Gold, blood and porphyry.\n\n(Correct and firm the conduct, thou shalt spy\ngood fortune from the sky.) ', 2: '䷖ \n\n\nPO: Falling; overturning; when things quake\nto agitate them more is a mistake.\n\nInjure the couch’s legs, soon all will go;\nInjure its frame, soon total overthrow.\nDestroy, when need is — will not wisdom show?\nThe couch destroyed, its occupant hath woe.\nBe loyal, help thy followers; all’s aglow.\nThat’ll bear thee brave; the small man digs his grave. ', 3: '䷇ \n\n\nPI: Union. First examine, art thou right?\nThen the restless join thee; woe the laggard’s plight.\n\n\nSincerity of union is the key;\nFrom inward mind comes forth true unity.\nUnite not with unworth’s iniquity!\nThere’s one beyond thyself that yearns for thee.\nBase well thy tower upon the people’s power.\nThy first step missed? Disaster shalt thou see. ', 4: '䷓ \n\n\nKWAN: Manifesting; contemplating; see\nthou be sincere, pure, just, with dignity.\n\n\nThoughtless and boyish: little shalt thou see!\nPeep from thy door — a woman’s modesty.\nConsider thine whole course insistently.\nState’s weal resolved, seek aid of majesty.\nConsider thy life’s course, lest action err,\nAnd criticise thy soul’s true character. ', 5: '䷏ \n\n\nYU: Satisfaction spreads through all thy coasts.\nAppoint thy princes, and send forth thy hosts!\n\n\nBoast not of pleasure! There lurks overthrow.\nBe firm, with foresight all thy soul aglow.\nPresume not; understand — what came may go!\nShed happiness, call friends to share success!\nMake not a habit; joy\'s as dull as woe.\nOh! Think more deeply; change is wisdom’s throw! ', 6: '䷢ \n\n\nZIN: To advance — when thou hast won folk ease,\nthy lord shall give thee gifts and dignities.\n\n\nFirm, patient and great hearted, wait thy day!\nMove with regret — the royal mother’s way!\nConfidence thus begotten — why delay?\nAdvance by stealth; the marmot guide thee yet;\nWoo not success; the games’s the game to play.\nUse power with caution or beware regret! ', 7: '䷬ \n\n\nZHUI: Collection; to the shrine repair\nand sacrifice the greatest victories there!\n\n\nAlone, art helpless; call thy right ally;\nWith him, even small prayers earn heaven’s swift reply.\nBaffled, yet struggling, thou shalt cease to sigh.\nSuccess excuses boldness; recollect\nthen to be firm in virtue and correct!\nWeep for thy loneliness — but still aim high! ', 8: '䷋ \n\n\nPHI: All’s disorder in the organum.\nWe see the great gone, and the little come.\n\n\nAgain one stalk pulled brings the others too.\nPatience, obedience, fitness, build anew.\nShame hide thy purpose from thy own right view!\nAct rightly; comrades come to love thee and wonder.\nRestoring all things, murmur, We may blunder.\nThe darkness passes; light breaks forth from under.', 9: '䷎ \n\n\nCHIEN: Humility; this yeast’s to baking.\nA man may win in every undertaking.\n\n\nIncrease humilities; so clears the way!\nOnce recognized, who is there to gainsay?\nAcknowledged merit will success inherit.\nGrow thou more truly humble every day.\nThus all thy neighbors in thy cause array.\nUse force — but only on the proper prey! ', 10: '䷳ \n\n\nKAN: Earth; keep silence like thy spine! See none\nabout thee! Thus the silk of wisdom’s spun.\n\n\nPlant firm thy feet; repose be now thy law.\nThy legs — ’twere ill to advance them or withdraw.\nIf loins move, the heart’s liable to riot.\nKeep still thy body’s fidgets, Johnny raw,\nand, for the love of heaven hold thy jaw!\nFortune attends who persevere in quiet.', 11: '䷦ \n\n\nKIEN: Incompetence and lameness; time\nfor the great man to aid thee in the climb.\n\n\nAdvance adds trouble; stillness aids thee now.\nKeep struggling with no self to mar thy vow.\nAdvance not; seek again thine ancient clan!\nAdvance not; be with those united thou.\nStruggle! Friends come to prosecute thy plan.\nAdvance not! Wait for aid from the great man! ', 12: '䷴ \n\n\nKIEN: Gradual progress: be thy right firm carriage\nsuggestive of a lady’s decent marriage.\n\n\nWild geese approach the shore — with care they fly!\nThey reach the rocks — and pasture joyfully.\nDry plains they cross — it needs a vigorous wing!\nThey reach the trees, and rest; but not too high.\nAt last they gain the goal of traveling;\nSee on broad heights their feathers glittering. ',
+    13: '䷽ \n\n\nHSIAO KWO: Exceeding in small things I’ve heard\nto soar too high is risky for the bird.\n\n\nThe issue’s evil when birds soar too high;\nThe wisest course is humble loyalty.\nWithout precautions, enemies assail;\nBut adaptation and sound care prevail.\nBirds in a cave — sure marks for archer’s eye!\nAmbition, in bad times, is lunacy.\n\nor\n\nHSIAO KWO: Excessive trifles; but beware\nin great things not to trust thyself to air.\n\n\nWinged though thou be, soar not too rashly high!\nLet not self seeking out run loyalty!\nMen be incaution ask their foes to assail;\nTact and adroitness helps one to prevail.\nAt easiest mark, let thine arrows fly!\nUncurbed ambition courts calamity. ', 14: '䷷ \n\n\nLU: Stranger, Firm right conduct may unravel\nmost of the tangles incident to travel.\n\n\nMean men by menial toil increase their woe;\nWell lodged, served, monied men more easy go.\nHis house on fire, his servants fled, ’ware danger.\nThough rich, armed, rested, still set caution ranger!\nGood manners, self effacement with the throw;\nwhile arrogance and violence hurt the stranger. ', 15: '䷞ \n\n\nHSIEN: Mutual influence; good fortune bless\nMan’s firm correctness with the tide, success.\n\n\nWould’st walk? To move thy toes alone is a flaw;\nBut calves? ’Twere surely better to withdraw.\nThigh’s too? Cling close to leaders? Thou wilt rue it.\nInsited plans? Only thy friends pursue it.\nBut shrug thy shoulders! God shall gladly view it.\nThe wag not thy tongue, nor drop thy jaw! ', 16: '䷠ \n\n\nTHUN: A retirement. Though thy force be spent.\nAdroit withdrawal masters the event!\n\n\nPeril! Withdraw! Keep still — though tail yet show.\nHold fast thy purpose subtly, even so.\nGracious to them that bind thee; hate their ire;\nmaugre their will, the great have wit to retire.\nRetreat in order — even the gods admire.\nRetreat with dignity — rekindle fire. ', 17: '䷆ \n\n\nSZE: Armies; all depends upon the sage,\nHis ripe experience, and his wisdom’s age.\n\n\nMark well the rules of martial strategy.\nChief of the host, thy king confers the post.\nDivided counsel — inefficiency!\nRetreat is not an error if need be.\nSeek and destroy bad faith and mutiny!\nBut find good men for posts of dignity.', 18: '䷃ \n\n\nMANG: Inexperience; let them see the sage.\nOne gains his smile; twice will excite his rage.\n\n\nCorrect him once to free; twice? Let him go!\nTreat fools and women kindly, they\'ve their uses.\nWed not loose women, only that they know.\nChains bind the ignorant, and sorrows flow.\nYet — the great fool! Simplicity’s good glow!\nProtect the ignorant from all abuses! ', 19: '䷜ \n\n\nKHAN: Defile, cavern, pit: In times of danger\nmake not sincerity of act a stranger.\n\n\nGorge within gorge, then cavern — do not go!\nInvolve not deeplier thy dangerous case!\nPeril all round — Be still’s the luckiest show!\nInstructing king’s, most humble caution show!\nBe patient, time brings order with grave pace.\nBound and beset, bewildered too? What woe! ', 20: '䷺ \n\n\nHWAN: Dissipation; in the world of fools.\nThe kingly man stands firm, divides and rules.\n\n\nOne needs a horse in this world’s mob-mellay;\nOne needs a refuge, a secure shrewd plan.\nWe must have knocks, nor mind them, in the fray.\nScatter the mob, then pick the choice array.\nCommand the mob, and fill their bellies, man!\nGood end forgets how badly it began. ', 21: '䷧ \n\n\nKIEH: Loosing; if all’s won, return and rest.\nIf partial gain, quick action will be best.\n\n\nBegin to loosen — Straight and clear the way.\nRid fields of foxes; fill the golden quiver.\nBeggars on horseback tempt the brigand’s play.\nStand not to oppose the friends come to deliver.\nRemove all wrong; then all men own thy sway.\nThe prince the falcon on the wall shall slay. ', 22: '䷿ \n\n\nWEI ZI: Work ruined! Ah so nearly crossed\nthe stream! Step slackly once, and all is lost!\n\n\nIs thy force equal to thy task? else try not!\nRetire in the face of overwhelming odds.\nTo the world\'s mote thine own eye\'s beam apply not!\nWar patient through persistent periods!\nSo win to fortune, fame and flame that die not;\nmasterful, modest, feast thou with the gods. ', 23: '䷮ \n\n\nKHWAN: Straitened and distressed; the great man acts.\nBut rhetoric is far removed from facts.\n\n\nBare buttocks — tree stump — valley — hopes decay.\nEmbarrassed king, be quiet and sincere!\nRocks, thorns — come home, and find thy wife astray.\nEven with friends the course is hard to steer.\nRebellion? Honesty has nought to fear.\nBound? On the brink? Repent and take thy way! ',
+    24: '䷅ \n\n\nSUNG: Strife: be cautious; seek not the extreme.\nSeek help from friends, and do not cross the stream.\n\n\nPerpetuate not strife, though slandered thou.\nO’ermatched, retire, concealment be thy friend!\nMaintain thy place, but claim no glory now.\nO’ermatched, the study of heaven’s law perpend.\nNow with great fortune on thy side contend!\nVictorious, the fruit’s bitter in the end. ', 25: '䷭ \n\n\nSHANG: The ascent; go seek the lofty one!\nAnd in the south give worship to the sun!\n\n\nMake thyself welcome with the great; aim high!\nSmall gifts are sweetened by sincere good will.\nBut empty cities ’ art thou bold to fill?\nThe king rewards thy true sincerity;\nAscend the stairs with proper dignity.\nFirm right maintain, though blind the silent sky! ', 26: '䷑ \n\n\nKU: Service. Thou mayst cross the stream no doubt,\nif thou have fully thought thy purpose out.\n\n\nGood son, repair thy sire’s infirmity;\nBe gentle with thy mother’s frailty, Son.\nYea, clear thy father’s troubles, every one.\nRestrain thy course; view them indulgently.\nThus gain the praise of thine utility.\nDo what thou wilt, thyself, a slave to none! ', 27: '䷯ \n\n\nZING: Well; the common fountain of increase.\nIf kept with care, its virtues never cease.\n\n\nMuddy or dried, what use? Beware decay.\nLeaky: for shame! The worker is disgraced.\nClear, but unused; how senseless is the waste!\nWell laid and lined, how noble the display.\nCome drink the water — cold, pellucid — chaste.\nHere to the brim it bubbles — go thy way! ', 28: '䷸ \n\n\nSUN: Wood, wind; mark their subtly suave persistance!\nElastic ease, the line of least resistance.\n\n\nInfirm of purpose, learn the soldier\'s way.\nAsk humbly of the gods to guide thy course!\nViolent excess of struggle breeds remorse.\nWide forethoughts and shrewd tactics pledge thee prey.\nWith steady, easy strokes apply thy force.\nFear, indecision, sap the last resource. ', 29: '䷟ \n\n\nHANG: By persistance are great empires built.\nThere is no law beyond do what thou wilt,\n\n\nLust of result mars will in every way;\nBut steadfast purpose spans the vast abysm.\nMaintain thy virtue — heed not criticism!\nSeek not reward; thy work be its own chris,\nPassion love wins, where active loses, fray;\nAnd violent efforts end in swift decay. ', 30: '䷱ \n\n\nTING: Cauldron; firm its auspice we may guess,\nrealization, progress, and success.\n\n\nUpset the foul pots! thy whore earns mother fee.\nBefore thou eat set guards about thy table!\nFrowns failure if thou be not equitable.\nThen shame on thee; thy case is pitiable.\nGold ornaments men’s firm sincerity.\nAnd rings of jade attest him honourable! ', 31: '䷛ \n\n\nTA KWO: A weakened beam is under stress.\nTo move in any manner spells success.\n\n\nPlace mats for things set down; then faults are few.\nDead willow shoots; old man young wife well wooing.\nThe beam is weak; fate’s busy with the brewing!\nThe beam curves up — loyalty did the glueing.\nDead willow flowers; old wife young men pursuing!\nBold wader, thine head’s wet — but thou wast true! ', 32: '䷫ \n\n\nKAU: Suddenly encountering — behold\na woman — do not wed her? who is bold.\n\n\nRestrain weak folly — or woo melancholy!\nHere’s fish — but ask not fishy folk to dine!\nDefeated, yes; but not at meat with swine!\nNo fish — because thou hast mixed with thieves, in fine\nconceal thy virtues — cellars ripen wine!', 33: '䷗ \n\n\nFU: Coming back; thou’rt free to come and go.\nFriends help; now move with confidence aglow\n\n\nCorrect small blunders — look for lucky wonders!\nHast erred? Return and take the proper way.\nReturn, return; and go no more astray!\nReturn though all thy comrades say thee nay.\nNobly return — the master of thy day!\nBut error piled on error — deuce to pay! ', 34: '䷚ \n\n\nI: Nourishment; the matter and the mode,\ndemand that thought should indicate the road.\n\n\nSuffice thyself; else — how thy jaw shall quiver!\nLook neither down nor up, the sages say.\nIll nourished, action merely means affray.\nBut lo! Below thee bleats the tiger’s prey.\nImproper method? Firm and cautious stay!\nBut thou, who nurturest all, mayst cross the river. ',
+    35: '䷂ \n\n\nCHUN: Firm, correct; great progress this evinces\nand vantage from appointing feudal princes.\n\n\nHard mere advance, maintain thy place correct.\nDistress, retreat; fear not, a friend is nigh.\nLost in the wood, seek not a deer to espy.\nRetreating, seek thy mate; with him, aim high.\nDispense rich favors as thy friends expect.\nThine house bolt; bleed tears of agony! ', 36: '䷩ \n\n\nYI: Increase; now’s no time to sit and shiver;\nbut to move on, even to cross the river.\n\n\nSuccess excuses boldness; face thy fate!\nGood omens and true virtue joined, essay!\nIll leads to well, for him who leads the way;\nEven the capital remove he may.\nLet all men share in thine approved estate!\nBy soul\'s disorders realms disintegrate. ', 37: '䷲ \n\n\nCHEN: Fire! Beware, but smile with mein divine!\nLet nothing scare thee into spilling wine!\n\n\nHere’s trouble; watch thy ways, but drink thy wine!\nTake lofty ground; the tide will ebb and flow.\nDistraught? May danger teach thee low to go!\nFight fire with fire, or sink in mud supine!\nTroubles mean profits for the men who know.\nCaution! Foresee the action of the foe! ', 38: '䷔ \n\n\nSHIH HO: Unite by gnawing; here success\ncomes by the proper use of legal stress.\n\n\nNip crime in the bud; lop toes, put feet in stocks;\nElse — flesh and nose must next be bitten through.\nQuick, or dried flesh gives double work to do!\nGnaw, gnaw, fake pledges ere the gate unlocks.\nGnaw: gold rewards precaution firm and true.\nOr, last, the Gangue — the ears cut off, fate mocks. ', 39: '䷐  SUI: Follow after; but in following checked\nby being firm, unwavering and correct.\n\n\nChanging pursuit, seek friends beyond thy gate.\nShould one leave old, and follow a young boy?\nWiselier leave youth, and age’s wit employ.\nAdherents hurt; make sure thy way is straight.\nFollow all excellence with eager gait.\nThe sincere king may sacrifice with joy. ', 40: '䷘ \n\n\nWU WANG: Sincerity and prudence; splendid\nif in these matters thou hast not offended.\n\n\nFree from all insincerity, press on!\nGood going, if thou reap with never a plough!\nYet — innocence oft bears guilt’s branded brow.\nFirmness, correctness; these bid woe begone.\nThe good man sick? He needs no doctor-don.\nTime’s come when silence’s book is best to con. ', 41: '䷣ \n\n\nMING: Intelligence sore hurt; reflect\non the position rigidly correct.\n\n\nHurt? Droop thy wings and fast, while critics leaguer.\nA horse may save one wounded in the thigh.\nThy great foe taken, be thou not over eager!\nEscape from night by mind’s propriety.\nThink how the court of Ki met destiny.\nAt last earth swallows him that trod the sky. ', 42: '䷕ \n\n\nPI: Ornament, should have free course indeed.\nBut — in its place: it shall not take the lead.\n\n\nAdorn thy feet, and have no need of horses.\nAdorn thy beard, for dignity is due.\nAdorn, seek firm correctness in thy courses!\nHorsed, winged, desire the honest and true!\nThough poor, suburban, there’s good work to do.\nClad in pure white, simplicity thy force is. ', 43: '䷾ \n\n\nKI ZI: Perfected work. Perfection borders\nclose to the frontiers of new disorders.\n\n\nMaintain success; be history’s lessons heeded!\nAlarmed, be not distracted or unsteady;\nPut to each enterprise the full force needed!\nTo stop the first leak, vigilant and ready.\nSmall works wrought wisely are most surely speeded!\nRash violence drowns in dark disaster’s eddy. ', 44: '䷤ \n\n\nKIA ZAN: The household: This right rule’s its base!\nThe wife be firm, correct, in her own place.\n\n\nFirst, proper law’s the necessary thing.\nHouse keeper, keep the house with modesty!\nBe stern for idleness and chattering.\nThus fortune helps enrich the family.\nAll share the luck of the high handed king.\nSincere, majestic, the end’s glittering. ', 45: '䷶ \n\n\nFANG: Large, abundant; now care’s night is done.\nShed forth thy glory as the noonday sun.\n\n\nFirst meet thy mate, then multiply thy force.\nBe humbly loyal in obscurity;\nLet not its accidents disturb thy course.\nMated in darkness — men! ’Tis fortune’s source.\nThen, call the clansmen of ability!\nBut pride and insolence slay majesty. ',
+    46: '䷝ \n\n\nLI: Sun; attachment. Be thy way docile\nas well as firm — then see good fortune smile.\n\n\nConfused at start? Let reverence befriend.\nHere’s fortune — rightly placed and clothed in yellow.\nAccept thy ills with cheer or worse attend.\nAbruptness — fie! Thus fire and death descend.\nLuck comes to aid thee, melancholy fellow!\nIn victory be just — a noble end. ', 47: '䷰ \n\n\nKO: Change; men doubt until their dullness sees\nthe change wisdom can foretell with ease.\n\n\nAt first; though art bound with strips of yellow hide.\nWait then a little, time’s a friend to thee.\nHaste may wreck all; discuss thy plans untried.\nFirst gain men’s confidence; then saddle and ride!\nSwift as a tiger — with the Yi for a guide!\nConfirm thy change with firm sincerity. ', 48: '䷍ \n\n\nTA YU: Great havings; wealth’s a sorceress,\nwithin whose cauldron bubbles up success.\n\n\nSteer clear of wrong, envision clear thy road.\nLo! The great wagon with its golden load!\nGreat prince to heaven’s son his duty hath showed.\nBut guard resources as his jewel a toad.\nsincerity is matched by majesty.\nIn all ways heaven’s blessing hath overflowed! ', 49: '䷒ \n\n\nLIN: Great; here’s progress and success to firm\ncorrectness; but — more trouble at the term!\n\n\nNow with thy comrade firmly force the pace!\nAdvance with him — alliance wins the race.\nBe cautious, or advance may lead thee astray.\nGo forward only in the noblest way.\nGreat rulers need great wisdom every day.\nHonest, magnanimous, woo fortune’s ray. ', 50: '䷨ \n\n\nSUN: Diminution; be sincere; the price\nis not the measure of the sacrifice.\n\n\nLeave business to help friends, but yet be wary!\nGuard against action; of the cash be chary!\nThree walk, one’s gone; one walks, and meets a two.\nBy friendship one finds woes becoming few.\nHere’s tortoise shells from the chosen few.\nPrudent though kind well served by friends o’dignitary. ', 51: '䷻ \n\n\nKIEH: Regulations: measured steps, but fear\nimpermanent results if too severe!\nThere is a time when wisdom urges rest.\nAnother when the bird should leave his nest.\nObserve no rules? Lament; the blame’s to thee.\nAttend them quietly — success flows free.\nEnact right laws — be tactful with decree,\nfor men are vexed when harshly pressed.\n\n\nor\n\n\nKIEH: Regulations. Who can do without them?\nBut not too many, lest men come to flout them!\n\n\nQuit not thine house to meddle with the state;\nBut set good order still within thy gate.\nThou mayest lament if thou should’st disobey.\nBut keep the law and go thy peaceful way.\nEnact thy laws ’ suave, tactful, moderate;\nBut vex not men with harshness overweigh! ', 52: '䷼ \n\n\nKUNG FU: Supreme sincerity; thy wish fulfilled.\nFor this moves even pigs and fish.\n\n\nTrust thou thyself, repose in thine own sphere.\nBut welcome and reciprocate good cheer.\nA mate involves vicissitudes that vary;\nHe travels fast who travels solitary!\nMen are most loyal to men most sincere;\nBut failure’s for sky-soaring chanticleer! ', 53: '䷵ \n\n\nKWEI MEI: To give first younger daughters — ill course.\nDon’t start with the carriage in front of the horse.\n\n\nGo to it, ye cripples! I’ll hold your crutches.\nBlind of one eye? Be as chaste as a dutchess!\nNow, younger sisters there’s scrubbing to do!\nBetter postpone matrimonial clutches!\nThink of Ti-Yi and his sisters anew!\nNo meat on the chops, and no beans in the stew. ', 54: '䷥ \n\n\nKHWEI: All’s disunion, mother of distress;\nBut in small matters there may be success.\n\n\nLost steeds return; bad men may yet take thy way;\nThy lord may chance to meet thee — in the byway.\nBaffled and punished? Bide time’s amnesty.\nAlone and disunion? Friends on highway\nJoined with thy minister thy course is free.\nPigs? Ghosts? Foes? Nay! Go forward on the skyway', 55: '䷹ \n\n\nTUI: Still waters may run deep and free;\nMistake not slackness for philosophy!\n\n\nAppease thyself, harmonious in thy sphere!\nSingle thy will, most utterly sincere!\nTurn not aside when siren pleasures woo!\nSearch thyself well to make thy purpose clear.\nToo trustful customers may buy too dear.\n’Tis pleasant to be captain of thy crew! ', 56: '䷉ \n\n\nLI: Is the treading of the path that’s right!\nStep on the tiger’s tail; he will not bite.\n\n\nFollow the path of thine accustomed right;\nLevel and easy walks the anchorite.\nLearn vanity, the brave’s bluff, to flee!\nTread on the tiger’s tail; he will not bite.\nFirm, resolute — yet perilous thy plight;\nExamine well, the augury of the flight. ',
+    57: '䷊ \n\n\nTHAI: The due order of things; we see, in sum,\ngood fortune, small things gone, and great things come.\n\n\nPull up one stalk; and others follow it.\nSeek patience, self reliance, love and wit.\nThough all things change, rejoice; for that is writ.\nCall friends to help thee, they may bring thee through.\nRemember what Ti Yi thought right and true.\nThe city’s fallen; there\'s little thou canst do. ', 58: '䷙ \n\n\nTA KHU: The great accumulation; quit\nthy private virtue when state needeth it.\n\n\nPeril; move not, but look within thine heart.\nThen, with due care, be ready for the start.\nNow, with good horse, well trained, play hard thy part!\nBlock even the young bull’s horns! He’s safer so.\nCastrate the boar — its teeth will gently show.\nThen rule the stars — good fortune aid thine art! ', 59: '䷄ \n\n\nHSU: Patience; be sincere; success will gleam\nFirmness brings fortune, thou mayest cross the stream.\nWait, constant, in the border of the land.\nWait, slandered, by the mountain torrents sand.\nAh! Shun its mud, or mischief is at hand.\nStill wait, midst blood. Forth from cavern hie!\nStill wait, at festival — Oh firmly stand.\nThree guests come helping; greet them courteously. ', 60: '䷈ \n\n\nHSIAO CHU: Shows small restraint. Hence quick success.\nBut clouds indeed, we ask rain’s happiness.\n\n\nStrayed — Come thou back and follow thy own plan!\nBy true attraction mete thy starry span!\nAnger in wedlock or a car en panne!\nBloodshed and woe sincerity bids go.\nSincerity: Here’s help from all the clan.\nWho wins too much may lose! Repose, O man! ', 61: '䷡ \n\n\nTA KWANG: Great strength. Be firm and self-reliant;\nBut — tyrannous to use it like a giant!\n\n\nPlant firm thy feet, but dare not yet to move!\nThy firm correctness exercise and prove.\nFences entangle rams who blindly shove.\nStrength fails to force some gates that yield to love.\nThine purpose gained, relax — nor tax thine heart so;\nOnce tangled, the best chance is — to know thou art so! ', 63: '䷪ \n\n\nKWAI: Cutting off; displeasure; front thy foe;but show reluctance due in acting so.\n\n\nLay well thy plans before the march begins.\nSeek loyal friends and have no fear of gins.\nFight on alone; persistant courage wins!\nDefeated, acquiesce — smiles conquer grins.\nUproot small men like purslane — tan their skins;\nCut off is he — and evil his end be! ', 64: '䷀ \n\n\nKHIEN: Originating from the term,\npiercing advantageous, right and firm. \n\n\nThe dragon lurks: it is no time to act.\nThe dragon’s in the field: now make thy pact.\nBe active, watchful, using care and tact.\nThe dragon leaps; a bursting cataract.\nThe dragon ploughs the sky with pace exact.\nExceed not, dragon, lest thy force react.\n\n(If all this heavenly host of dragons lacked\nTheir heads, good fortune would become a fact.) '
+}
+
 			$(".cards").hide();
 			
-			openingKeySpread()
+			
 //ss
 			//have to think about this
 			function openingKeySpread(){
@@ -31,16 +90,29 @@
 						getData(arrDigits, function(err, data){
 							arrDigits.push(data);
 							$("#" + arrDigits[0]).appendTo($("#key_2"));
+							$("#key_2").append("<span class='title'>" + $("#" + arrDigits[0]).attr("class") + "</class>");
 							$("#" + arrDigits[1]).appendTo($("#key_1"));
+							$("#key_1").append("<span class='title'>" + $("#" + arrDigits[1]).attr("class") + "</class>");
 							$("#" + arrDigits[2]).appendTo($("#key_3"));
+							$("#key_3").append("<span class='title'>" + $("#" + arrDigits[2]).attr("class") + "</class>");
 						});
 					});
 				});
-				
-	
 			}
 
 
+			function iching(cb){
+				$.get("https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8&size=6", function(data){
+					var data = data.data[0];
+					
+					if(data <= 63){						
+						cb(null, data + 1);
+					}
+					else{
+						iching(cb);
+					}
+				})
+			}
 
 			function getData(arrDigits, cb){
 				$.get("https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8&size=6", function(data){
@@ -60,10 +132,85 @@
 		
 	</script>
 	<style>	
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+	h1{
+		font-size: 26px;
+	}
+	h2{
+		font-size: 18px;
+	}
+
+	.intro span{
+		padding: 26px;
+	}
+
+
+
 		.data{ 
 			font-size: 4px;
 			width: 100%;
 			height: 100%;
+		}
+		
+		.title{
+			font-size: 13px;
+		}
+		
+		.front_ul li{
+			padding: 15px;
+			float: left;
+		}
+
+		body{
+			overflow-y: hidden;
 		}
 
 		.key{
@@ -72,7 +219,7 @@
 		}
 	</style>
 	<div class="cards">
-	<div id="0">
+	<div id="0" class="The Fool">
 1
 t                                          . ..  tttttttttt @             t
 t                                  :t:               :ttt11tt .           t
@@ -139,9 +286,8 @@ t      tttC C ;@  tt ;t t         @t  C ;C  C; ;C   C  tt                 t
 t        tt   t@: tt t@t;         GGt   @.  ;@ tt   tt.tf  ;              t
 t        ;:   ;@: tC;;CtC:       :Ct;    tttt    ttt   tttt     ;         t
 t;tttt  tt  tttttttttttttttttttttttttttttttttttttt@@GtttGtttttttttttttttttt
- 
 	</div>
-	<div id="1">
+	<div id="1" class="The Magus">
 1
 tt;C@t8; t1CtCtttt;CttCCCCtCCt;   tttt   ttCCtC;:t;C@CttC@8t;t8:C;t@CGtCC:C
 @CCCCt@@C@CttG;G;:CG:t; CG   t;     @..   G ;; ;;tt ;  G.;: G@@;GC8CGCtt;tt
@@ -209,7 +355,7 @@ CC@@C8C@tCt8C888CC8C8;G@fftfCtG@G;ttG.;;t.fG.CtG.@Gt.ttft;t.ttt:..C .tG;ttG
                                                             t  :          t
 tttttttttttttttttttttttttttttttttttttttttttt;;.    tttttttttttttttttttttttt
 	</div>
-	<div id = "2">
+	<div id = "2" class="The High Priestess">
 1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@t   . tt @          C                      .  
 @@@@@@@@@@@@@@@@@@@@@@@@@;t@Gt     Ct G         t                          
@@ -277,7 +423,7 @@ Gf;tt1081tttttff@@@1:;  .  ;: : .i:G.;.t.   ; L:fC;t,..C  .C 1:  tt;;.;;;:t
                                                                           t
                                                                           ;
 	</div>
-	<div id = "3">
+	<div id = "3" class="The Empress">
 1
 t                                                                          
 @                                   t t t                                  
@@ -345,7 +491,7 @@ t@GtG@CtGt@;Gt.ttGt@ft;.C;tt 8t;tt@tttCG@ttt@ttftttt;C tt@tttftCtt: ttt;C;f
        @@;  t;  Ct Ct;:     ;ttt: ;C:  :Ct tt;   t;  t t;:::tttt tttt tt  t
 t@@@@@@@C@ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttG
 	</div>
-	<div id="4">
+	<div id="4" class="The Emperor">
 1
 t                               tt;;Ct;tt;                                t
 t                               .@  t;:t                                  t
@@ -413,7 +559,7 @@ t      .                                         ..                       t
        @   tt  t; @  t     @  t ;t   tt @;   tttt  G; ;C ttCt   C  C  t   t
  ;                                  ;  ;     ;;.:;;ttt; ;       ;;     ;: t
 	</div>
-	<div id="5">
+	<div id="5" class="The Hierophant">
 1
 ttttttttt  tttttt ;t  @           tttttt;;           tt    ; tt  tttt ;t: ;
 C ttttttt .1;tttf;;t  @             ;t.G             t t   t tt  .ttt;  ttt
@@ -481,7 +627,7 @@ C8@GGC.  ;G;:t;Ctt.ttGttt         :1t  ;t;.    .:...;CC;.@C@t;fCtCttftC; .t
    tt  tC  t; GCtt   Ct  tt Ct @ttC tt ;G Ct :  t    @  tt C  t;C  Ct  tt t
                                                                           t
 	</div>
-	<div id="6">
+	<div id="6" class="The Lovers">
 1
 t   ttt ;ttt;. t                ;ttttttt                  C; .      tttttt@
 t     :ttttt;. t                 ttt;tt                  tttt:  . .;tttt1tt
@@ -549,7 +695,7 @@ t;tt......tt....t.t.;ftt@t@CtttttC88tttttttttt;   11111t1111tt111111111111C
 t      C@;   t:  C ;t t      :tt    tt     :   ttt                        t
 G                               ;;ttttttttttttttttttttttttttttttttt;t ;t;t;
 	</div>
-	<div id= "7">
+	<div id= "7" class="The Chariot">
 1
 t                               tt ;;tttttt;                               
 t                                 t;t @ tt                                 
@@ -617,7 +763,7 @@ C@t@@G@@;.GC@GfG@@@@@@@; t;f8f@@@@; ;; : C :1ttf. 11;            C;;:;:; tC
                                                                           t
 ;  ;t ;tt;t:tttttttttttttttttttt ttt; ttttttttttttttttttttttttttttttttttttt
 	</div>
-	<div id="8">
+	<div id="8" class="Fortress">
 1
 t..                       .                                               t
 t                                t @:;CC;C;                               t
@@ -685,7 +831,7 @@ GGGttt.................................................ff.f; ttt  tt;Ct ttC
           ;ttt:   : :  ;t    ;                                             
                       ;;t t;ttttt;;;;;ttttttttttttttttttttttttttt;        t
 	</div>
-	<div id="9">	
+	<div id="9" class="The Hermit">	
 1
 t;                           .   ttttCC@@@t                               @
 t                                  @  t@;                                 @
@@ -753,7 +899,7 @@ t             @t  Gt.tC.tt;         8 t@ 8t ; @t:G t CC @  @t  @t  ;      @
 t                                                                         @
 Gttttttttttttttttttttttttttttttttttttttttttttttttttttttt   ;ttttttttttttttt
 	</div>
-	<div id="10">
+	<div id="10" class="The Wheel of Dharma">
 1
 t;       t      .;tCtt;.     t;  ;tttttt;       C .   ;C        tt  .;ttt;@
 t tt;t1  t :;;C@;;t tft       t     GC; ;;;  :tt               t: Ct;t;t  t
@@ -819,10 +965,9 @@ t                 .                  ...    .                   ...  ..   t
 t C  @  Ctt t t   t :tt        ;;    tt t G  :t @ Gt:tt  t  t  @@ t tt    t
 t  CC tC tt t tt; tt t;      .; t@   8t;  @  ;t C;t  tt  tt @  @ CC tt    t
 t   :  : t: t t  ;@;;:tt;     t; t   :t    :;   t  :::t   ;;              t
-t                             ;     ; ;tttttttttttttttttttttttt t         ;
- 
+t                             ;     ; ;tttttttttttttttttttttttt t         ; 
 	</div>
-	<div id = "11">
+	<div id = "11" class="Scales">
 1
 t ttt  :.;t1                    t  ; t .;                    tt.;       t t
 @ ftt     tt ..                   G@; @                     ;@       ;; t t
@@ -890,7 +1035,7 @@ t           ;; @   t; C  .;   Ct  tt    @t :@.     @.;..                  t
 t           :tt;    tt t; tt::;   ;t   ;tt   ttt: ;tttt     ;;            t
 t                                 ;    t:;;ttttttttttttt;tttttttt;;;tt: ;;t
 	</div>
-	<div id="12">
+	<div id="12" class="The Hanged Man">
 1
 t  t;                              @G  t t                                 
 ;Cttt;:  CCt                    ;ttttttf;              :;CC         tGttC;G
@@ -958,7 +1103,7 @@ t  tt  tt .C;Ct   t@ tt tttttt:Ct @ ;t;tt;. @  tt  t ttt @ tttC  tCGt     t
 t  :t  ::  @;t ;  tt :t @  CCC; t  ttt:;tt: ttt   t;  t :t ;  :tCt ;t C   C
 t   tttttttttttttttt   ;ttt tt                   :ttttttttttttt       tttt;
 	</div>
-	<div id="13">
+	<div id="13" class="Death">
 1
 t    ..                      .t@@@@@@@@@@@@@@@@@@Gtttttt                  ;
 @                             ;@@@@;t@t@tt@@@@@@@@@@@@@@@@@@@@@@@t        t
@@ -1026,7 +1171,7 @@ t               t@   @  @tC    t; :@;   t@t    t@   @t                    t
 t              :tCt:t   @ttC: GC   C@;  t@C    t@; :tt   ::               t
 Gttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt  G
 	</div>
-	<div id="14">
+	<div id="14" class="Enchantment">
 1
 t                           :tttttttttt;                                   
 G                             Ct @.G;t                                     
@@ -1094,7 +1239,7 @@ ttttttttttttttttffft8tttttttt8tttttttttttttt8C888@888tC8CtttCtttttttttttCt@
       ;;;  ;;;        tt :;t         ;          ; t;                      t
 ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt;;tttttttttttt
 	</div>
-	<div id="15">
+	<div id="15" class="The Devil">
 1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@C ;:      C@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@C
 @@@@@@ tt@@@@@@@@@@@@@@@@@@@@@@@@; C@;;C@@@@@@@@@@@@@@@@@@@@@@@@@@@@@tt@@@t
@@ -1162,7 +1307,7 @@ t            @t   @  tt @           @  tC tt..  Gtt  tt  @               t
 t                     ;                   ;:t;  ;t;  :t :ttt     t       t 
 tttttttttttttttttttttttttttttttttttttttC@tttttCtttttC@@@@@@CttttGGtttCtGt@ 
 	</div>
-<div id="16">
+<div id="16" class="The Tower">
 1
 @@@@@@@@@@@@@@@@@Ct .. t:.;@@@@t   .  ...      C@@@@@@@@@@@@@@@@@@@@@  t@t 
 @@@@@@@@@@@@@@t t:t;tt;      t@   Ct  C C t     G@@@@@@@tt@@@@@@@@@@@; t@@t
@@ -1230,7 +1375,7 @@ f .  .         tt CCt1Ct@ @ Ct@ tt.8tt@@  tt@  tt G@ 8;t8t8@@@@@@@@@@@@@@@@
           @;   Gt  tt @CtC        CG    tttt   ;@;;C   GCCt: t  :t  t     t
 t                                                                         t
 </div>
-<div id="17">
+<div id="17" class="The Tower">
 1
 t                                tt; t ;:@ tt                             t
 t                               ;CGCt @Ct@tCCt                            t
@@ -1298,7 +1443,7 @@ t           @   t;ttCt @tt         .. t.  tt   t  8  tt  C                t
 t          ;@;  Ct  tG @tt        tttt:   tt  :                           t
 t                             ; t;tttttttttttttttttttttttttttttt;   ;;   :;
 	</div>
-	<div id="18">
+	<div id="18" class="The Moon">
 1
 t                                CC;t.t.tttC     .t                       t
 t                               ;Ct; @t @tt@     ;;                        
@@ -1366,7 +1511,7 @@ t        @    tt  tt.ttC       t;C ttt:@   t@ @t  t@ t Ct t
 t        @    @;  tt G; t;     C  t tt ;C;;C   tttt  t;  Ct   @            
 t                                                                          
 	</div>
-	<div id="19">
+	<div id="19" class="The Sun">
 1
 t.;;  ;      ;;. .   t.. t   ;   tt .8  Gt.. .tt   ;     ;:;;   t         t
 t    t:   t      ;;  t    :  ;; ;; ftf.f  ttC.t  .;    ;        t   .:  t;;
@@ -1434,7 +1579,7 @@ t        Ctt@:ttt@: tt  @;;t      @ :C tt  C   tt  C                      t
            ;@   ;@; Gt ;@ttt     Cttt:  t:: t  t  :;      ;t              t
 t                                                                         t
 	</div>
-	<div id="20">
+	<div id="20" class="Judgment">
 1
 t                               tCt@;tttt                  tCCCtt        t 
      tt :tt  ;tt                .CfC.;CG:                C      tt;t@8;  t 
@@ -1502,7 +1647,7 @@ G .      t;G@   G. t   t@..@;tt ;Gt tt    t :C.t  @   t .t C@@   tt  .    @
 t        :tt    :t: t  ;ttt   ;ttt: tttt  t    t;:tt    tt                @
 G                         ; ;; ttttt;ttttttttttttttttttttttttttttttttttttt@
 	</div>
-	<div id="21">
+	<div id="21" class="The Cosmos">
 1
 t   t;tt  t        ;;;..     .   tt ;;; t          ;C .  .;.; ;;;:;;. :   t
 t:t        t ;                  t;C G;; t         t t    .;   ...;;;;;t    
@@ -1571,7 +1716,7 @@ Gt.;  :81tt..;;;.C;;1t  t          ;C;;;;t.. .;:;.. ttf. .:CC8tt@@t18C@L;tG
                                      ttttttttttttttttttttttttttttttttt; : t
 	</div>
 	<!--END TRUMPS !-->
-	<div id="22">
+	<div id="22" class="Ace of Cups">
 1
 t .                 .       C                  ;t                          
 t                           Gt.                tt                          
@@ -1639,7 +1784,7 @@ Ct88GC1 t  : 1;Ct...t;CCCt..Ctttt888t;t88tGCtCCt...CCttt;8Ctttt@G ttttCtCGG
      tt  t@  :ttt tC  :     :;:tt    :CC :  ;@@:   t;   :tttt:  ;;         
 tttttttttttttttttttttttttttttttGttttttttttttttttttttttttttttttttttttttttttG
 	</div>
-	<div id="23">
+	<div id="23" class="Two of Cups">
 1
 t .                                 ;ttttt                                 
 t                                    t tt .                                
@@ -1706,9 +1851,8 @@ i.......f@@  t     ;t tC8GG.....................ii;ffftt;@: .GtG   1G;t  ;t
                                                                      t.   t
                                                                           t
                                                                           t
- 
 	</div>
-	<div id="24">
+	<div id="24" class="Three of Cups">
 1
 t                                 tCtGGGt;.                                
 t                                  t tttt                                  
@@ -1777,7 +1921,7 @@ t                                ...  .tt; Gt@tG@G@;@;@t ;.  G @G@; CCG@;;t
 ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 	</div>
 	<!--FOUR OF CUPS!-->
-	<div id="25">
+	<div id="25" class="Four of Cups">
 1
 t             G GtCC   @G .   tG;        t  C@@@t.tt@CtCt ;C ;CC t@;@    :@
 t             tttCt;t .tGt@t;CCC ;tG.t   tG; @;tt:@t:@@G;t@t:  Gt8;@;:1   @
@@ -1845,7 +1989,7 @@ tC   ttt @;@@tt @tttt ; ;@  :1t  G: t Gtt;@;   :         .  t    Ct@CCt8t @
 t..ttt@@;  t@t:t:  t@Ct    @t@C@tt@   ;t;; ;  tt@;      ;t     :   t:     t
 @C@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@t@@@@@@@@@@@@@@@@@@@@@@@@@@@@t@C@
 	</div>
-	<div id="26">
+	<div id="26" class="Five of Cups">
 1
 t                                                                         t
                                    Ct @;                                  t
@@ -1913,7 +2057,7 @@ tC@tG   tC; ;Ct@@t     tCGt@         ;t   .   : @@@           t t;:@      t
      t  tGGt :tG     ;ttttt                                C;   t:t: C    t
       CCG .;tC@tt     . ;tttt                        :ttttttt@CCCtt@CtttttG
 	</div>
-	<div id="27">
+	<div id="27" class="Six of Cups">
 1
 G                 .                .                                       
 t .                               ;Ctt @t                                  
@@ -1981,7 +2125,7 @@ t   . .Gtt  .@ ;tttttt;t;:@; t  ;.;C;. t;;t;;1.;;t  ;         t ;t ;t.:   ;
 ;     G;;G   ;t;      ;;; t;  C : ;;G;@; ;;  ;  tt;  .        t; C  ttttttC
 ttttttttttttttttt;tt :t;tt;ttttt;;;ttttttttttttttttttCtCC@tCtCttCCC@CtCtttC
 	</div>
-	<div id="28">
+	<div id="28" class="Seven of Cups">
 1
 t                                tttttttt;           t;..;;;.;t;;  .      G
 t                                8.@ @ @t           : @@@;t@t; GG@@@@;    t
@@ -2050,7 +2194,7 @@ t      t@@@@@@@@@@@@@@@@@@@@@@;                                      t:   C
 @@t@@@@@@@@@@@@@@@@@@@@@@@@@@@@tttttttttC@@tCtCCttttGtttttttttttttttttttttC
 	</div>
 	<!-- eight of cups !-->
-	<div id="29">
+	<div id="29" class="Eight of Cups">
 1
 @                                                                         t
 @                              C@;;@C@@GG;                                t
@@ -2118,7 +2262,7 @@ t     C.;GGCC      C 1C@@@C      :C :.@@@:     tt  ;tCt     t;   8t@ ;tC: t
 t   Gt;;:ttt;t    C t ttt;G     C;t CttGC;    Gtt ttttCt   CG     ;G      t
 t ;Ctt       tC ;CtG    t;;@tttCCCttCCCCC@Ctt@@Gtttt@C@@ttttttttttttCC@@C@@
 	</div>
-	<div id="30">
+	<div id="30" class="Nine of Cups">
 1
 t                                                                          
 t                               tCCtG@@t                                   
@@ -2184,10 +2328,9 @@ t                                                                 t t ;
 t                                                                   t      
 t                                                                   @      
 t                                                                          
-t        :t;                                                              t
- 
+t        :t;                                                               
 	</div>
-	<div id="31">
+	<div id="31" class="10 of Cups">
 1
 t                                 ;@ttC;                                 .t
 t                                   tC                                    t
@@ -2255,7 +2398,7 @@ t                                                                   .Ct.  t
 t                                                                    C    t
 Gtttttt       tttttt;t t   ttt;;:  ttt;t  ;   t;t;                        t
 	</div>
-	<div id="32">                                    
+	<div id="32" class="King of Cups">                                    
 1
 t                                                                          
                                                                            
@@ -2323,7 +2466,7 @@ t      @CC,. tt @;8;t @t;t;    t;CC     ;t.. ..@  G  @tt  tt@;
 t     ;t  tt :: t; :t  ttt:   ;t; t      :t;   ;t t;;@   tt ;;  t          
 t                                ;..               ;;        t ;t         ;
 	</div>
-	<div id="33">
+	<div id="33" class="Knight of Cups">
 1
 @                                                                         t
 @                                                                        tt
@@ -2391,7 +2534,7 @@ tt                .                              .
  t tt  Ct tt :t :t ;tt::t  @ :t   t; t     :tC:  :t ::t  :;t :  t          
  t                                  ; .                                   ;
 	</div>
-	<div id="34">
+	<div id="34" class="Page of Cups">
 1
 t                                                                          
 t                                                                          
@@ -2459,7 +2602,7 @@ t          ,0t  t;tCt              tL0@;0 fi,Ctt.tC     0,@               t
 ;@  tt  tG CC@:ttG     CC:tt      ;@; :  CttC; Ct  CCtG;  C;               
 tttttttttttttt;  tttttttt;ttttttttttttt:    ;t  :;tttttttttt  ;       tttt:
 	</div>
-	<div id="35">
+	<div id="35" class="Queen of Cups">
 1
                                                                         . C
 ;                                                                         .
@@ -2528,7 +2671,7 @@ t ;@ttG;;@;CC tt t @;;t;C ;t  Ct;t    t@tt  :Ct:C ;t  :tttC;  t;          t
 t     t; .                      t;      ;; tttttttttttttttttttttttttttttttG
 	</div>
 	<!-- ACE OF PENTACLES !-->
-	<div id="36">
+	<div id="36" class="Ace of Pentacles">
 1
 @                                        ..                               t
 @                                                                         ;
@@ -2596,7 +2739,7 @@ t t @  @  :: t@;      .   tt.tt @    t@; t   tt   t tt Gt ::tt   @ ; tCt; t
 :t   t: ttt: :ttt; :t:tt  t:    tt;: ::  t   :: :;   :: t; :;; : Ctt::tt:CC
 tttttttttttttttttttttt@ttttttttttttttttttCCC@@@@@C@@@@CCttttttGttCCC@@@@@@@
 	</div>
-	<div id="37">
+	<div id="37" class="Two of Pentacles">
 1
 G                                  ;tC@@@                                 @
 @                                    tt;                                  @
@@ -2664,7 +2807,7 @@ t                                                                   t     @
 t                                                                         @
 ;  tt      ;t     ;tt;           tttttt ;         ttttttt   tt:t:tttttttttt
 	</div>
-	<div id="38">
+	<div id="38" class="Three of Pentacles">
 1
 t     ;               ;Ct tt;t;t;t@C@t@tttC;tt;tCt  Cttt t  ;tC; .   .   t.
 t            C;  . ;G.:t;;t       @;@ @      ;t tC;tCt        ;;        tt 
@@ -2732,7 +2875,7 @@ tt;    t; @t                       ;;;.... ;;ttG;tGGCCt8C;.tttt      t    t
        ;;t;                                   C; 8tGCC: t;tCG:t           t
         ; ; ;        ;tt;   ..;;t t; ;    ;G;C;;;;tt;t;Cttt;Gt; :  t      t
 	</div>
-	<div id="39">
+	<div id="39" class="Four of Pentacles">
 1
 @                                                                          
 t                                  @t G:t.                                 
@@ -2800,7 +2943,7 @@ LffGff.t;f :C8@818;t.ittf8Cf   t      f   :8;.fG:   tGCGi@@8Cft1L1L1tLfi@@@
                                                                           t
  :ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttC@C
 	</div>
-	<div id="40">
+	<div id="40" class="Five of Pentacles">
 1
 @;ttC@8;C@@ttGtt   t@ ttttt ;C;tC. C; t   C.@t  @.t; C8t  ;. C;t@CCC@CGtC @
 t Gt@CCCCC@CGG;  t t@.t@t;;   tttt: tC  C;C:;     @@ @@t  ;tt8tG@CCCGt@:CCt
@@ -2869,7 +3012,7 @@ t :8     .@.G;ft  t@@GC8ff . 8:t    .8tGCC;G8ttttt.
                               ttttttttttttttttttttttttttttttttttttttttttttG
 	</div>
 	<!-- SIX OF PENTACLES !-->
-	<div id="41">
+	<div id="41" class="Six of Pentacles">
 1
 t                                 f; tttt.                                 
 t                                  ttt CCt;                                
@@ -2937,7 +3080,7 @@ t;C               @CGffCCLtCtC888GLGGff;Ctt1  . 8;::
                                                         ;CCtCt;:ttt    ;  t
                                        ;    ttttttttttttttttttttttttC8Ct;;t
 	</div>
-	<div id="42">
+	<div id="42" class="Seven of Pentacles">
 1
 t                           ;tttttttt@@t                                  t
                               ;G;G  tt@                                   t
@@ -3005,7 +3148,7 @@ t  t@@@@C@88@;.tt    ;C;...;   .   ;t   ;C;.tCt; Ct     ;CC;C;  . tGG;ttt;t
 t;         @@@ttt@CC  tt ttt  ;t :t    G; t .     t;t ;t;t;t;@C@;tCCtttG: t
 t    ;;           tttt.  ..           t;CG;;tCttt;..tt;; .G;      ;t;.    t
 	</div>
-	<div id="43">
+	<div id="43" class="Eight of Pentacles">
 	1
 t                                 .  ;;t;;                 ;CCGttttt@ttt ;8
 t                              t; t;.tt t .             C@t ..  t@C @ttt; t
@@ -3073,7 +3216,7 @@ t            @t.;...  ;Ct    tt             1CCCCt8C;            . CGtt   t
 t              t@@@@Gtttttt@t                                     ;tttt:  t
 t                                                                        :G
 	</div>
-	<div id="44">
+	<div id="44" class="Nine of Pentacles">
 1
 t                                ttttttt;                                  
 t                                 tt t@.                                   
@@ -3141,7 +3284,7 @@ t  t tt                    tt  t                                       @@@t
 ;  :t      t@Cttt            ;                                      .tt@t @
 ;                             ;                               ;  :ttt;;  tC
 	</div>
-	<div id="45">
+	<div id="45" class="10 of Pentacles">
 1
 G                                  . ....                           .;;tt t
 t                                    tt                              ;@@@CC
@@ -3210,7 +3353,7 @@ tt@@@tG@@C:    CttCtG;t;:G;C@G@@@CCC;CC@@C@t@ @  t ;C:Ctt ;t     t Cttttttt
 @@@@@@C@@CC@@@@@@@@@@@@@CC@@@8@@@@G@@Ct@@@C@@t@ttCtC@@@@@GCtttt@@CCC@@@@ttt
 	</div>
 	<!-- KING OF PENTACLES !-->
-	<div id="46">
+	<div id="46" class="King of Pentacles">
 ;                                     
 1
 C                                                                          
@@ -3279,7 +3422,7 @@ ttt@; @ t;@tt@t;tt  ;;CtC .t   t.;  t;8;t  tt  t  ttt@     @   tt   ;..tt t
 @t;;@Ct t  ;; ;tt;  ;t G  ;C   tttt t  ;;  ;t tt  ;t;  ;  ;    t;; ;  :   @
 t;tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt;; ;: t
 	</div>
-	<div id="47">
+	<div id="47" class="Knight of Pentacles">
 1
 t                                                                          
 t                                                                          
@@ -3347,7 +3490,7 @@ t GC   @tt.t @t@.  ;@:C  @   .;;  t@:;;GC tC@ t  @  t @ tC.  tt  t;  Ctt  t
 t t :; @ :@t @ @CGtt@ @  t  t t;t  @   @ @ t;@t  @ t  tt;@   tt ;t;;;; ;@ t
 t                                                                         t
 	</div>
-	<div id="48">
+	<div id="48" class="Page of Pentacles">
 		1
 t                                                             .           t
 t                                                                         t
@@ -3415,77 +3558,76 @@ tCC  t ;@t@ ;..@C    ;ttC@;    @t;.ttt. @;@tt  @  tCtG tG   t@   @@t  ;@t t
 tt: tC  :C t t;@ t    t; @     C:  :t;t @  t   t: :  :: :tt ;ttt;t:t t;t:@G
 t
 tttttttttt ;   ;ttttt  t      ;ttttttttttttttttttttttttttttttttttttttttttG
-
 	</div>
-	<div id="49">
+	<div id="49" class="Queen of Pentacles">
 1
-t                                                             .           t
-t                                                                         t
-@                                                                         t
-@                                                                         t
-t                                                                         t
-t                                                                         t
-t                         11:tttttC1:           .1Cttt:                   t
-C                 :1;tttiC@t     1:::.C       1i   :    G:                t
-@                1C@8fC8t@    :11@@CfCL@:    8.   :.t    ;1               t
-@                 t 8f ttf. 1C@f    i@8@t   tt 1;tC..t;f  f               t
-t                 G Gf8C@G:@@@@   i tt@@t   .t   ft1L,L   C               t
-t                 .f8ff@888@@G      ;iGCf    ;1  C;  .i  L.               t
-t                    Lt,G@1@@8     .ftt.t     .G1    . 1; .               t
-t                          fG@;  ;CL18t C      t. ,,f,tif                 t
-f                          .8,,f1: @8fG f    t.  :  ;,tt.                 t
-t                     Li.iitL0@8LCtL@0.:f   ;     t   ;.                  t
-t                    tt:.   ,Ci,,@G8   @.,G1   :1  t                      t
-t                    ti       fi@0fii0i   L :;t8i111                      t
-t                   t0;        :.,@:    i   1tC. f .                      t
-t                    tf       Lii,  .0Gf ..,t@.  t.                       t
-t                    t@8:    8Gii    ;;  .t;@f   t                        t
-t                    t@@;C: i:C    . ,;  i;L@f   L                        ;
-t                    t@@t.Gtt0t8.:; . 1. 1.t0G   t                        t
-t                    tt@tCtt1ttttG;tt..    t@; ;i                         t
-t                   ,L0@,,@1C.Litt         t0;;;                          1
-t                    10@1t,tf,,tC,1 ,      tt                             t
-t                     G@1t  tL8LtLt t       t                             t
-t                     ,@8,  ti:tGtCC08GG;;;L                              t
-t                    . 00  t0;i;  .;itiCG: 0                              t
-t                         tt1t@:@1 tCLtt@@@C                              t
-t                        LCit@,t0  ,@tLtt ;0                              t
-C                       LLti@i L   i@tLii t@t                             t
-t                      tL;L0t ti   tttti,.tLt                             t
-@                     tfi0tL  0    @tti;t t@L.                            t
-L                   .iitL,t; ,t   i@ Lii  ttti                            t
-@                   ,1Li1C   t    t8 @,tt tttt.                           t
-@                   Li,tt,   t     tt@ tt ttLt.                           t
-@                    ,t,t   i1    t,t@ tt t@01i                           t
-t                   ..Lft   G     t t@ t  ttt C                           t
-0                        fttf:   @t.@L t ,fft,                            t
-@                          t  i;i11f@t,ti:t                               t
-@                          t     .i:      t                               t
-@                          t     i0       t                               t
-t                          t   i t:f     t                                t
-f  LC@GfCCftf1tL.         .   f;1 ,1    .1.                               t
-t f;G:t;;1L.;G1101 ti    t   tiL .1     t                                 t
-f8188C 1  Li tt..it @   t     t. f      1                 1 1             t
-tG@@LG@Gi,0@fCi .@ t8. @t .  f8 tG.    t.              ..1 : 1f           t
-G  i@8:@@@@i@@8@@8@iC t@tffLi@t tLiiiiLCt       . .,,tf                :  t
-@iLL@8CC@@@C8@G@@@@f,,tft   i@iiL@Gi..,@GL;Ct ::CLLti i  .     ;ii1       t
-GG@88:  1. 1L08@@8L8C18 L@@@C8@88@@t  tGCGLtLft ...,;:,. . ,...   ,    t i;
-@  ...tt.:;88: L    :t:  CL:  18LC@:  tLtttfi,,,tt@C;@@t t  :i f...       t
-@  ..,0t  ..Gfi     ;:  fC      .8t   t  . L888Gfi...    :1:1:1:111:;,:1C t
-@  :1:. ..:1tf..   .: CiLt ..;   C    t;.   .f;;1t1118GfG@@@@@8C@@@@@@fGt.f
-@1:;    1 :18C8Cit1 18f81t.1...;;C:   Cf.;.ii.;; LLCL:888CGC@C8C8ftL@@8C8@@
-t8C; ;tC:  :t@Gfft .;Gt.tt.;if. t; ...8. .1@C.CC ;;;.1 ;; ; 1:C1L888CCC8888
-@GC:G.88   ;@@t;;.t8CC;. .. C.tiC81C@C88tfCGtCCCt t: .. .f. .: ;; :::.;t81t
-@GGt@ft; t;@G@C; ..C;tLC:tGtfG@@;Gf8;ttt@ttC;. f;tt :; tt@GC tt;:  ;tC@tt;t
-@@t@Cf:@C@@@@8@@8;GC@@8C@CCC8;C@@G@8GGftC8@Gttt 8;. ;.;t;88t:; . ;.;tCCtt G
-@tC;Gt;;;tGG@Ct@f@@C1::;C@C:t;;C:C118C11111:C: C:  :t ;8t1;1:tt::;...;;;1Ct
-t      .     .. .       .          . .   .    .      .  .   ...    .   .  t
-;@ttCtC@; tC1tt@ t      t;     @ttGtC C @@ tttt@tC @@; ;@@@:C@:  @ @ @Ct8 t
-tCC  t ;@t@ ;..@C    ;ttC@;    @t;.ttt. @;@tt  @  tCtG tG   t@   @@t  ;@t t
-tt: tC  :C t t;@ t    t; @     C:  :t;t @  t   t: :  :: :tt ;ttt;t:t t;t:@G
-ttttttttttt ;   ;ttttt  t      ;ttttttttttttttttttttttttttttttttttttttttttG
+tttG@;@:@;8;;@@@CCtCC@;;tttt;CCC     .;Ctt8t@;t;  ;tCt.;;;8;8tt;t;t  ; tG@C
+t@C @t;ttC@@f@@;@@@tC;t@@@ C@G@ ;8C@;. tG;C;CtttCt@@@ tC;CCCCC;;t.;CC8C.@G;
+tttCC@CC8CtCt888CCCC;t@Ctt;tCG;tCC@;CtttC88t@;t@t;CCC@8C@C@.CttC@CG.;;C;;@t
+t;@tCtCt;C.8@CtCtfCG@t;tC     .@;ft@CG@@ ;@; .Gf@GCC@@G@@t8C;tC8@C8@tGCt;;;
+t.@t8;G C:Cft;@ ;C  t.tCt             .t  .   .;t@.t t.C@@C;Ctt@8CtC@C8CCt8
+tC.GtCC8f:@;.@it    t;                          .t.    tf  t;;  .C;.t;:;@@@
+tG@1@1Ct;8t;@                                                   C. ;G@CCCC@
+tGCtC@@..@@@                  .            :L8Cttftttt1111         ;G:@C 8C
+t@@.C8;;   @f                LL1     . t.. 11CC..i..G C::.if@8C   ;188tC 8G
+t;t        .             :tt11@Ct : :;.Lt1.0t@:.t.tt:Cff CC81.G@8:.:@C8 t:;
+tC.G;                    .Cf:t@f..tttLC ;t:t.iL. , LL;;1tC::ti:f@@L:L8C;L8 
+t88f;                      GGiC t ttf@f8.11:tG. .;;LCt  ;t0@Gtt @@t ;ft8t:1
+tfC,.                   .LCt..t:f.LCC8G@GC@11itC1t1tt1;;;8GCt1t.@@tiGC1f; .
+t@L11   1                :t1Li;LfL@@@C@G1CCGfLfif@@G,@@CC1;C.@t @@t .:CL8C;
+tG@0:0 G11.              .i10i .i. f@@8it@@iLf.fC@L:1L@ @@8.G@t G@t t;.1ii.
+t8i;,i8;t                  f@@L:: . tLG8.@@C@@@@i@C:1@8ttfC@L8. @@fL,GfC@CC
+t@@@ f@                    tt@8@@; t .. Ct8G@@8L8,i@G:0;C. ttft C@t;C80:GLL
+@iCit                      .L@@@@@@1 .:Gt.1@@@@G@f8Lff,Ctf1:t8t @@@@t.t;@G1
+@CLC                        @@G@tt11L8.;:88@@@0@G8CC10@f@@fLG@t1@@tiL,@t@.;
+G@L:                       t00t,t;:t. t10CC8i@@G@8@@Gt 1C@G0,ttt8@t 1 t8L8L
+G;@:                       @0LG8@L:  ;Lt@@@i@@@@@L8@8@88 . @8@tt@@t :C1@ti8
+8@C                      .iL800@@@8iiL01LLf@@@@f@fC@@C@8it1  @ti@@t;,.,@C.0
+80,                       i1t@@@@Gt,i,08@t0@@@0C01tt0@C@L0@0@L:t@@8Gf0@@0;0
+t                      ,i,:1;C@@t@ft,tttt08G@i@. tt@CL0L@C@t @tt@@t8@@,@@L@
+t                   .;Ltftt1;i@t@L;t:8t:18C8i@f tt8G0f0@@@ 1L@tt@@fft  L@8L
+t                 ;i.   ,    ,CG0;Ltftit:,@@01,, t@GLtt@C@Gf0@ t@@t.   1.@@
+t                t,    tf,     i810CiL t:80;Li1 ; L80@tLf@@@Gftt@@t    ,t0@
+t               t, ,;;;L;L ,,   itLt,@iG,1 ,,,. ;tG0@@L0@@f@tft0@@t     ,8L
+t ,t  tt        @  ,L,C.  t ti,  @00;L:t1..  :;itf@@C0t@@@@@0CC0@@,      ;0
+t,i  ,; ,it;;   t,   i;L,tLt    1LGii,ti  ; ,:tit@CGC0t@00@G00,0@@t ;,t L0t
+t,.  . i;;t;t;;t G,. ttt,:LL, ,;0t,,Ct,;i;.tf.C;0@C@C0t@C8G0C. @@8L;;C   @0
+G;:i,,          ,ttti,      ;t;  ..@0ttCLtLLC; LCL@C@0t00@@L  11@@0: ,:  0@
+tti, ;L;i,, , ;;00Lt00CCtCC@0;Lt,,t0LCitt,, ,GLt@@0@CLt@00t,it00@8,:,L t C0
+tLi;;;,iCL;@L,f0@C;  ,1LL;;;tGLG;, ,,C;0,C,@0tt@L@@@0C0t,,t00,tt@@i ii@:L@t
+LL@0@0@tf81,iCG@@G.  0ttt   ,0,.L,CL:1i1@0;t@L@@00LCLCLf0LfG0tti@8 @LtLC@@0
+LtLtL0;,;@fLt@i@;C; ,iiL   ,tiCt;@fLf@f:ttC0@tLtit CCL,:CCGC0@C0@@0t;@t0t@@
+t  ,:@G; 0tGf@0L@Ci  @;L   ,;L,f 0iC1;CtfLi:@i    ,,,tftCGG@@@@@@@@t@tCCt@L
+8G@8G1L8C@L1tLitL0. ;@tt    t0t0@1;;C0fGGCGt1@0  ,,8LGC00@@@@@@@@@G@L8i0@@@
+0iG@C0CCCt;:,iLC@0,,,t0     0G0@0t;t:@t@0,.i@@@  C1G8@@@f@@@@@@@@@@@L@C8fG@
+1     :0, ;;f,;8@@t;GC0    iCL10ttf,f0t@:i@itfCCiL;@@0@@@L;8@@@@@@f0@f0@@08
+Lf0CG0CC,tC@11tt@C@fLt0   .@1fitC1C Lfff180:@it:C:L@@t100fL0@@@@@@iLtt@.t10
+1fti01i,iGGfffftt@@tGGt   ;t;@tf88f 8 L,1@Ct@LC0i@t81@@L  tfi80@@@C@@L01f1L
+ifG1Ci0t.L8L1t@8@@@@GLt   :i:@@ 1f8 Cf1@:@8LL;t1tL8@@ff1t  0Gt@@:@iifiL,@ G
+0f;LGGtG@00L@8@tf0@@@@i   ,:tCC8Gf8f:1 L.0@tC1   tCLftt . t8.L@@@@1ff,1C,f@
+G:@tG@088iftti@ ;t8@@@1   GCtGC8:ttCt;G@@8@@t:;:.ttCG,@@@@tC0@@88L.LL;1.  t
+L1L@@8@CfGt;LL8ft@L0G@  L01;tLtC:CtL::t1f18tt   .tt@8G .0@@@@@GL:f8,ii8tt88
+t@;itt@@@GfCtGCGi;,,CtL80L .f8tt.LGG8t;tft1GC,. .tC@8@8@@@@@@f. .,  G@fti @
+;fC;@i@88Gt@8L@0C@@@@i8i L@@GL:L,f@8C G@:8C.88; : 8@G@@@@@@f@i@@@;,fG ,1@G@
+@LLCttttf@LC8fC1tii0 ;8@LiiiL@8@CC;C:t8tGt1iftCtt f@@@0LLLiitL:   @C;C: :iC
+8f;.i.t;i.::L: ; t:.LL0L.G,;:;;tCC.G1 f8011t1C@@;t@8L.    :;     C G   ;:tt
+8tL: ; .;G . .i,t:t .L@@Gt;..;G@8@@C08t Lt;iGi,.,.,.:tCG,iC1  tL;.C@i.8:.,C
+:t.1 t; .C,i;ii.f,C : .@Gfi; L. f. ;CGC88t.Ltt8C1:C;.ttC1:. .CCfi8@tf@@@C@@
+.;fC1.:C@t;.i, Ct181Cif8CC8@GfiGGG08C@ Cf;C.8tG;@8;C1:.; .fi18f@@G,iL1C8@@@
+LGi;tGiLt.C11tC;8CL8L8CGGtttfC;ffftiCGC;;;CtffG@@G8C@GGfG@G@8iiG8@0CG:;@@@@
+;;.t tft;G;1tt1;GCLt1:tLt@C;.it;C1;8@88f88C8@8@@CftG@CCC8888:GL1.t1188t.tt@
+;.; C;t ;.;t;t ttCifG. :   t;GttLCttfi  :. ; .:  :  11  GttCGi@@t1:.L;C8@@@
+.t:   . ;;t8tC11;t,ftCCCL1C8C@1C@@. .. ; :.. . G;it; t;iftCiGftC;t:ff@C@tC@
+ ;;;;.Gt ;;;8 t ;;; ; ;;. t; 1 :C8 C      Ctt@tGf;;;t@tCtC.tt;G@t@f@@8@Gt@@
+C18@C8@C8@@CGGCtCt.ttf. t .. :;; ;.i.. .f..:t8;tt8t8CCtCt@Ct88C88tC;ftG;CG@
+f@@@@fCG@@G@;@;t.;;;;;;.;f;;..;;@.CCC8CCCtttttCCCtttCCCCCCt8C8CC8Ct88ttttCt
+.    ..                          .   ..     .        .. .           ..  ...
+t:  C;tC tt  @ t:Ct t @@; C     ;  tG @:@t;:t@t t @tt ttt@ ;@:@t:t  tt  @ ;
+@;  :@t@  t  8 ; ttt  t C;C ..;t:@ttG . @;t.tttCC  tt .t Cttt . t@  ttt  t@
+ ttt@  tt:tt t:t tttt t: :t   ;; ;t;t;  ttt:t: ::  :t:t: :t ;tt:;tt;:t   :C
+Gtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 	</div>
-	<div id="50">
+	<div id="50" class="Ace of Swords">
 1
 t                                                                         t
 t                                    Ct;        :                         t
@@ -3554,7 +3696,7 @@ t@   C8t tttt  tttt:   ;t .C  tttttt   :Ct CC   :t;  :t: :t:tttt   :ttt; tC
 G
 ttttttttttttttttttttttttt@ttttttttttttttttttttttttttttttttttttttttttttttt@
 	</div>
-	<div id="51">
+	<div id="51" class="Two of Swords">
 1
 ;                                tt.tttt;                                 t
 t                                 .@ tt                                   ;
@@ -3623,7 +3765,7 @@ ftttttttttttttttttttt;tG  . ;1   .   ;.      1  L ;  C11ii111iii1111iiiiiiC
                                            ;tttttttttttttttttttttttttttttt@
 	</div>
 	<!--Sword 03 !-->
-	<div id="52">
+	<div id="52" class="Three of Swords">
 1
 t                 G                .                                      t
 t                t                tttttt                                  t
@@ -3690,9 +3832,8 @@ t         ;            t                                          C       t
 t         t           t                                                   t
 t                                                                         t
 G;tt     t:    ttttttttttttttttttt;ttttttttttttttttttt@@@@@tt@@@@@@@@@@@@@C
- 
 	</div>
-	<div id="53">
+	<div id="53" class="Four of Swords">
 	1
 @t@@@@@CC; C@@tGCGCttCC;t t   ttCtttt;tttt;                               t
 ttttt;C  @Ct@8ttt     G;; t   ttt @t G;t;                                 @
@@ -3761,7 +3902,7 @@ t                                                               :   : ;: :C
 G
 ttttCtGttttCttCttttGGtttCtttt@@@@@@@@@@@tttttttttttttttttttttttttttttttttG
 	</div>
-	<div id="54">
+	<div id="54" class="Five of Swords">
 1
 t                               tCCtt@;         . ; . t.                  t
 t                                 ;;C          : .  t                    tt
@@ -3829,7 +3970,7 @@ t  t         ;;.tt ;t;        .;CCtt.    ..C;tt               tG     tt   t
 t                t;;t; tt     tttttttttttttC;Ct                 C      tt t
 t                   ;t;;;.;t;               t;tt                  ;t@C@tt t
 	</div>
-	<div id="55">
+	<div id="55" class="Six of Swords">
 1
 t                                ttttttttt                                t
                                   ;Gt; t                                  t
@@ -3897,7 +4038,7 @@ G;                      :Ct8@@@C@.tCtt    t@@tttttt   ;ttttttt  ;tt.  t; :G
 ;t@;GGtGGG@t@@Gtt@GGC@@GtC@@t    ;C@tt  tt;C@@   tt;         :t     :ttt: t
 ;tttttttttttttttttttttttttt@CC@C@C@@@@CCCttt@@CtttttGttttt tttttCtttttttttG
 	</div>
-	<div id = "56">
+	<div id = "56" class="Seven of Swords">
 1
 t                                                                         t
 t                               tttttttttttt:                             t
@@ -3966,7 +4107,7 @@ t                                                                         t
 t
 @tCt;ttt;;:;; ;  ;;;ttttttttttttttttt@@tt@@@C@C@CtCCttttttttttttttt@@@Ctt;
 	</div>
-	<div id="57">
+	<div id="57" class="Eight of Swords">
 1
 t .                      ..    ;CttG@t@GGt                                t
 t                                t;f ttt;                                 t
@@ -4034,7 +4175,7 @@ t..tGt t;tCC;ttC;  .;;;;ttttt.. .   .      t88@tCCtt@Ct ;88C@t      @     t
 t;;tt               . ..;tCtt  :tt;   ;CC ttttttt         CtGt   :Ctttttttt
 Ctt ;t  ;                       .  . .  tt                                t
 	</div>
-	<div id="58">
+	<div id="58" class="Nine of Swords">
 1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ct::tt;Ct@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@t
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@tt@t;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@t
@@ -4101,8 +4242,8 @@ ttC t:;;tCi.ft8t@Ctt;.;;;;..tt t..G; .C@t 88C;G tt.t;ttt;;;:.,;; ttt@8:t;:t
 tttttttttttttt:ttt  ;;         tCCC8@8C@Gtt                               t
 G                                                                         t
 G .                   ;   ;;;tttttttttttttttttttttttt   ;; ;t;t;t;; t; ; tC
-	</div>
-	<div id="59">
+</div>
+	<div id="59" class="Ten of Swords">
 1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@t;t .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:G@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -4171,7 +4312,7 @@ G                                                                     @
 @                                       tttttt   ttttttttttttttttttttttt@@t
 	</div>
 	<!-- KING OF SWORDS !-->
-	<div id="60">
+	<div id="60" class="King of Swords">
 	1
 t                   .ttt;ttt;..tttt;Gt ;ttC;;..t G;;tC                     
 t               tC   t;;.f  :CCfGGCG@G8CGtGtGC  Gftttt.                    
@@ -4239,7 +4380,7 @@ t      @C... t@;tt:tt @ ..   t;tC..:@@G tC;tG.Ct@. ttttC  tt  @;ttt;      ;
 t     ;@  tt;C@ CC :@ ;t@@  :t: C G@tC:  tt :C  CttC Ct Ct;t;C:@ttC: t    t
 ;   tttt    ttt;; ;t;ttttttttt ttttttttttttttttttttt;;ttttttttttttttttttttG
 	</div>
-	<div id="61">
+	<div id="61" class="Knight of Swords">
 1
 t            tt G       ;;           ..             ;;t.  .  ..         . t
 t            .ttt :;t;;                       ;;t              :;   t;  t t
@@ -4307,7 +4448,7 @@ t :@   tt;t tt@  .8tCt t     ttt  ;GCt 8tC;t.8. @ttt@..@  @ .CC           t
 t  t t t :@ ttt;C;t tt t;  tttC   @tt; :: ;: :t ; G  t ttt ;t;:  ::       t
 t                            ;.                                           ;
 	</div>
-	<div id="62">
+	<div id="62" class="Page of Swords">
 1
 t                                                 .         ttt          tt
 t                                                          t tt          tt
@@ -4375,7 +4516,7 @@ t @tt..ttt @t    Gt      ;; Ct.      .tC;  C;tC;t tt  @ @ G  t t@   C;  . t
 t @   t  @; C@8 :C t     tttt       tCtGC   t  ;   :;t  t  t ::; ;ttt  :; C
 t        tt t;ttttttt ;ttttt  tttttttttttttttttttttttt;tttttttttttttttttttt
 	</div>
-	<div id="63">
+	<div id="63" class="Queen of Swords">
 1
 t                                                                         t
 t                                                                         t
@@ -4443,7 +4584,7 @@ t;G8   ;8818C:C88CtCttC88811tt111111111111t1:1111tGCCt..t:..t.     :. tt  t
   tCt@  ;@CtC;tCtt @;t;C  CC   Gt t  @ttCt  :;  t  ;ttt tt ;C t: t tt:;:ttt
 t;;t;t:t  :                      ;C                                       t
 	</div>
-	<div id="64">
+	<div id="64" class="Ace of Wands">
 1
 t                                                                         t
 t                       ;;t :1t:                                          t
@@ -4512,7 +4653,7 @@ t t@   @C t@@@: @@tt;    :C;tt     t@; :C; ;@;  @C CC  @t  CttCt  ttCCC tG@
 @
 8CttttttttttttttttttttttttGGtttttttttttttttttttttttttttttttttttttttttttttC
 	</div>
-	<div id="65">
+	<div id="65" class="Two of Wands">
 1
 t                                                                          
 t                                  tttt                                    
@@ -4580,7 +4721,7 @@ t                                                                 ;;.tt   t
 t                                                                    t    t
 Gt        ;ttt     ;ttttttttttttttt t  ;                                  t
 	</div>
-	<div id="66">
+	<div id="66" class="Three of Wands">
 1
 t                                tttttt                                    
 t                                 t;t;.                                   ;
@@ -4648,7 +4789,7 @@ t .f;..tttt G8.. t@tC@CttC@@tt88CtC8@Ct.t8C..t8@@t t;   t;t..;@CGCt;tt ;  t
 C@@tGtt ;;tC;;Ct         t;GCCGttG;   ;CtC tCCC;          ;@@;@; CtC;tt :CG
 tttCtttC@tttC@tC@ttt    ttttttttttttCGttt8tC@C8tt@@tt@tCtC@@Gttttt@tttttttt
 	</div>
-	<div id="67">
+	<div id="67" class="Four of Wands">
 1
 t                                   ttt ;t;t                               
 t                                   t; ;t;                                 
@@ -4716,7 +4857,7 @@ t                                                                    ; t
 t                                                                      :   
 Gttt;             tttttttttttttttttttttttttttttttttt;   ;;  ttttttttttt ;tt
 	</div>
-	<div id="68">	
+	<div id="68" class="Five of Wands">	
 1
                              .                                             
          :.                         G; G                                   
@@ -4785,7 +4926,7 @@ G..;iGLi@fi.,.   C: ::f.      :t.:Cf...f   GC@@@t8t011Ltii@; tt8;fff ,tLt;t
 C@@@@@@@CCttGtttttt@t@@@@C@@@@tC@@@tttt:tt;tttttttttttttttttttttttttttttttt
 	</div>
 	<!-- SIX OF WANDS !-->
-	<div id="69">
+	<div id="69" class="Six of Wands">
 1
 t                                       .                                 t
 t                                ;t t. @         tt                       t
@@ -4853,7 +4994,7 @@ Gt;       C; C;:t   t;        @ t         @tC;  t         ; t.; t tC;  t  t
 C     ;CC:  @:     t          C ;t                          tt tt.tC .t   t
 Gtttttttttt@;tttttt;tttttt;ttttttttttttttttttttt;ttttttttttttttttCGtt;Ctt;t
 	</div>
-	<div id="70">
+	<div id="70" class="Seven of Wands">
 1
 @                                                                         t
 @                               ;@tt;ttt;                                 t
@@ -4921,7 +5062,7 @@ t.      ..G@;   :tCt;       tftC;    t;Ct;  .  tC: ..    C;;@t;1tC@tt ....t
 t  @        ttt  ;tt@ttttttt;@ ttCG;@; t ;t           tC@tt t@    ttC@ ;t  
     ;      t     t; 8.;tttt;t@ @@tttt; C t@ tttGttttttt    C;tCt   @;G;t;t.
 	</div>
-	<div id="71">
+	<div id="71" class="Eight of Wands">
 1
 t                               ;t@ttGCt@tt                               t
 t                                 ;tC tt@tt                               t
@@ -4989,7 +5130,7 @@ t ttt;     t:;              .                        ;t; .   Ctt . .tt ;C;C
 t.C;;          ;     t CC t:@GtG;ttttttt               ttttt  :tt     ; t;G
 t; ;;;t;tttttt@@@Ctttttttt;t;..   ;  ;t ttttttt;;  ;:ttttt     ;ttttttttttt
 	</div>
-	<div id="72">
+	<div id="72" class="Nine of Wands">
 	1
 t                                  .  . .                                  
 t                                   t f@;                                  
@@ -5057,7 +5198,7 @@ t .                                       .C1t;G@t:8;.   1t:              t
                                            ttC:                           t
 ;          t;; ;: t; t                tt tttttttttttttttttttttttttttttttttG
 	</div>
-	<div id="73">
+	<div id="73" class="Ten of Wands">
 1
                                 . ;t;fttt                                 t
                                     ;@t                   t:      .;@     t
@@ -5125,7 +5266,7 @@ t                                                                     t   t
 t                                                                         t
 Gtttttttttttttttttttttttttttttttttttttttttt@C@@@tt  tttttt  ttttttttttttttt
 	</div>
-	<div id="74">
+	<div id="74" class="King of Wands">
 1
 t                                       t@             ;      ;tt@@@t      
 t                                       t@; tCC tCC  CG@@@@G@; ;;CtG:      
@@ -5193,7 +5334,7 @@ Gfff;.;.....    8;.ttGC@G@GGtf;.. .          .    .......    ;tttt;     : t
   ;t  ;t  ;t :t  :t  ttt;    tt; t       ;;   t; @   GC @; :: C@Ct  Ctt:: t
                              :tttt;;    ;;ttt                ttttt;:ttttttt
 	</div>
-	<div id="75">
+	<div id="75" class="Knight of Wands">
 		1
 t                                ;t                                       t
 t                               GG;t                                      t
@@ -5261,7 +5402,7 @@ t;.                                                    G;    ;t@t   ;;@Gt.@
   @ ;G t  C@ ttC@:@ Ct @   @:  Ctttt    :@t C@ ;t  t;tt t@ tC ;:;; tt;;    
          tttttttttttttttttttttttttCtttttttttttttttttttttttttttttttttttttttC
 	</div>
-	<div id="76">
+	<div id="76" class="Page of Wands">
 1
 G.                                                                        t
 G                                                                         t
@@ -5329,7 +5470,7 @@ t G@8t.Ctt@.@f    @Ct      ;;8C;     t@.C:8 C; C;;@  t Ctt @t ;@.  @G     C
 t @@: Ct  CC;C@@t @@@t    ;C;tt       :t   t  tt  tC;@  t;:tttt:tttt :t:  C
 CttttttttttttCtGttttt@@tttttttttttttttttttttttt@@ttttt@@@@@@@@@@@@@@ttttt@@
 	</div>
-	<div id="77">
+	<div id="77" class="Queen of Wands">
 		1
 t..                 t;. ;CCC@t. ;Ct;t.C Ct. ; CtG ;  t                     
 t                   t .;;t   tt    Ct;:t ..:   ; ;;.  t                    
